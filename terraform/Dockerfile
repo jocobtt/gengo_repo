@@ -1,5 +1,13 @@
-# this below is if I want to run terraform on its own from an image
-#FROM hashicorp/terraform:latest 
+#this below is if I want to run terraform on its own from an image
+FROM hashicorp/terraform:light
+
+LABEL maintainer "Jacob Braswell"
+
+COPY . /terraform/ 
+
+
+ENTRYPOINT ["bash"]
+
 
 # If I want to build my own terraform image from scratch 
 #FROM golang:alpine
