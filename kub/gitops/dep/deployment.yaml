@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: gtops
+  annotations:
+    flux.weave.works/tag.flask: glob:develop-v*
+    flux.weave.works/automated: 'true'
+  labels:
+    role: frontend
+    env: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: frontend
+  template:
+    metadata:
+      labels:
+        role: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16-alpine-perl
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - name: nginx-proxy-config
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: nginx.conf
+      - name: flask
+        image: docker.io/jacobkun/flaskapp:develop-v1.8.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 5000
+        env:
+        - name: APP_NAME
+          value: gtops.K8s.GitOps
+        - name: APP_VERSION
+          value: v1.0.4
+      volumes:
+      - name: nginx-proxy-config
+        configMap:
+          name: nginx-conf
+
+
+# want to make this so that its more of my own deployment - want to do a lot of the kubectl stuff by just using kustomize: https://docs.fluxcd.io/projects/helm-operator/en/1.0.0-rc9/tutorials/get-started-kustomize.html
+https://blog.container-solutions.com/using-helm-and-kustomize-to-build-more-declarative-kubernetes-workloads
