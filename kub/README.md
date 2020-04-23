@@ -11,3 +11,5 @@ https://kublr.com/blog/implementing-a-service-mesh-with-istio-to-simplify-micros
 https://itnext.io/kubernetes-authorization-via-open-policy-agent-a9455d9d5ceb
 https://itnext.io/optimizing-open-policy-agent-based-kubernetes-authorization-via-go-execution-tracer-7b439bb5dc5b
 https://clusterise.com/articles/kbp-1-intro/?utm_sq=gbq989nxbj
+https://knative.dev/docs/
+https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
