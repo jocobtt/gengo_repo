@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: scrape
+  namespace: kube-prac
+spec:
+  schedule: "*/0 0 0 * * 0" # run weekly. Monthly is 0 0 0 1 * * etc. 
+  jobTemplate:
+    spec: 
+      containers:
+      - name: scrape
+        image: busybox # may need a different container image for job I want to run - ie web scraping w/ go or python 
+        args: 
+        - /bin/sh # go into the shell of the pod
+        - -c 
+        - date; echo Hello from the Kubernetes cluster # what is executed
+      restartPolicy: OnFailure
+    

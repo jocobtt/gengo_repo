@@ -5,7 +5,7 @@ metadata:
   namespace: kube-prac
   labels: 
     app: nginx-prac
-spec: 
+spec: # the desired state of the resouce. status is the observed state of hte object ie recorded sate the cluster provides to the user
   replicas: 2
   selector: 
     matchLabels:
@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         app: nginx
-    spec:
+    spec: 
       containers:
       - name: nginx-prac
         image: nginx

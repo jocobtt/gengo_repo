@@ -1,6 +1,10 @@
 # create a kustomization.yaml file to update the container images in our deployment.yaml file
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization # need to fix this, currently getting this error: unable to recognize "kustomization.yaml": no matches for kind "Kustomization" in version "kustomize.config.k8s.io/v1beta1"
+
+# add namespace to all resources 
+namespace: kube-prac
+
 image:
   - name: nginx # match images w/ this name 
     newTag: 1.8.0 # override the tag 

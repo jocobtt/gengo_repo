@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+  namespace: kube-prac 
+spec: 
+  schedule: "*/1 * * * *" # means it will run every minute 
+  jobTemplate:
+    spec: 
+      template:
+        spec:
+          containers:
+          - name: hello 
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster # what it will print every minute 
+          restartPolicy: OnFailure
