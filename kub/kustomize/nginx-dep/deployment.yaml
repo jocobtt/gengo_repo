@@ -6,7 +6,7 @@ metadata:
   labels: 
     app: nginx-prac
 spec: # the desired state of the resouce. status is the observed state of hte object ie recorded sate the cluster provides to the user
-  replicas: 2
+  replicas: 3
   selector: 
     matchLabels:
       app: nginx
@@ -18,3 +18,5 @@ spec: # the desired state of the resouce. status is the observed state of hte ob
       containers:
       - name: nginx-prac
         image: nginx
+        ports:
+        - containerPort: 80
