@@ -12,4 +12,10 @@ image:
 resources:
 - deployment.yaml
 - ns-set.yaml
+
+# labels added to all resources 
+commonLabels: 
+  app: example
+  env: test
+
 # if we want to set a new name for an image we just do the same but put in containerrergestry/myimage and differentregistry/myimage to change container registries
