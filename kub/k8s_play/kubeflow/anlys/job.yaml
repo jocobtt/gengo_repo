@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: xgboost-test
+  namespace: kube-prac
+  labels:
+    app: xgboost-synthetic-test
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      annotations:
+      # comments can go here
+      sidecar.istio.io/inject: "false"
+    labels:
+      app: xgboost-synthetic-test
+  spec:
+    restartPolicy: Never
+    securityContext:
+      runAsUser: 0
+    initContainers:
+    # this init container checks out the source code 
+    - command: 
+    - /usr/local/bin/checkout_repos.sh
+    - --repos=kubeflow/examples@$(CHECK_TAG)
+    - --src_dir=/src
+    name: checkout
+    image: grc.io/kubeflow-ci/test-worker:v20190802-c6f9140-e3b0c4
+    volumeMounts: 
+    - mountPath: /src
+      name: src
+  containers:
+  - name: executing-notebooks
+    image: execute-image
+    command: ["python3", "execute_notebook.py"]
+    workingDir: /src/kubeflow/examples/xgboost_syntethic/testing
+    volumeMounts:
+    - mountPath: /src
+      name: src
+  serviceAccount: default-editor
+  volumes:
+  - name: src
+    emptyDir: {}
+
