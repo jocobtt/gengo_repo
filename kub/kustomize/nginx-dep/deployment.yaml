@@ -21,6 +21,15 @@ spec: # the desired state of the resouce. status is the observed state of hte ob
         component: nginx
         tier: frontend
     spec: 
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: type
+                operator: In
+                values:
+                - t2medium
       containers:
       - name: nginx-prac
         image: nginx
