@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: knative-test
+  namespace: kube-prac
+spec:
+  template:
+    spec:
+      containers: 
+        - image: gcr.io/knative-samples/helloworld-go # will need to update the url depending on the image i will use 
+          env: 
+	   - name: TARGET # environment variable printed out by sample app
+             value: "Go Sample v1"
