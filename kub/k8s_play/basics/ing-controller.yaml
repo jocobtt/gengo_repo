@@ -1,0 +1,22 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: test-service
+spec: 
+  host: test.example.com
+  tls:
+    secret: test-secret
+  upstreams:
+  - name: pizza 
+    service: pizza-svc
+    port: 80
+  - name: pasta
+    service: pasta-svc
+    port: 80
+  routes: 
+  - path: /pizza
+    action: 
+      pass: pizza
+  - path: /pasta
+    action:
+      pass: pasta

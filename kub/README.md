@@ -20,3 +20,6 @@ Some stuff I want to play around with/build on involving Kubernetes.
 - [ ] https://knative.dev/docs/
 
 - [ ] https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
+
+- [ ] ingress and ingress controllers [link](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+- [ ] set up a cluster using [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) 

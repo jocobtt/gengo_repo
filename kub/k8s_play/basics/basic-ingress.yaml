@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  namespace: kube-prac
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+       # pathType: Prefix (this feature is new - only for 1.18+)
+        backend:
+          serviceName: test
+          servicePort: 4200
+# add another path in the site
+      - path: /jabrazzy
+        backend:
+          serviceName: jabrazzy
+          servicePort: 8080
