@@ -22,4 +22,9 @@ Some stuff I want to play around with/build on involving Kubernetes.
 - [ ] https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
 
 - [ ] ingress and ingress controllers [link](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+
 - [ ] set up a cluster using [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) 
+
+- [ ] https://www.kevinsimper.dk/posts/kubernetes-prometheus-docker-for-mac
+
+- [ ] https://github.com/bibinwilson/kubernetes-prometheus
