@@ -28,3 +28,6 @@ Some stuff I want to play around with/build on involving Kubernetes.
 - [ ] https://www.kevinsimper.dk/posts/kubernetes-prometheus-docker-for-mac
 
 - [ ] https://github.com/bibinwilson/kubernetes-prometheus
+
+- [ ] https://towardsdatascience.com/how-to-create-and-deploy-a-kubeflow-machine-learning-pipeline-part-1-efea7a4b650f
+- [ ] https://www.docker.com/blog/depend-on-docker-for-kubeflow/
