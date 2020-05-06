@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+import os
+import sys
+import logging
+import ConfigParser
+from optparse import OptionParser
+
+if __name__ == '__main__':
+    parser = OptionParser(usage="%prog [options] bankname")
+    parser.add_option('-f', '--config-file', dest="configfile", help="config file", default=os.path.expanduser("~/.bankscrape"))
+    parser.add_option('-s', '--config-section', dest="configsection", help="config section", default='[bankname]')
+    (options, args) = parser.parse_args()
+    try:
+        bankname = args[0]
+    except IndexError:
+        parser.error("You must specify and bankname")
+    if options.configsection == '[bankname]':
+        options.configsection = bankname
+    banknames = __import__('bankscrape.banks', globals(), locals(), [bankname], -1)
+    try:
+        bank = getattr(banknames, bankname)
+    except AttributeError:
+        parser.error("Can't find module for bank name '%s'" % bankname)
+
+    config = ConfigParser.SafeConfigParser()
+    config.read(options.configfile)
+    try:
+        config_items = dict(config.items(options.configsection))
+    except ConfigParser.NoSectionError:
+        parser.error("Can't find config section '%s'.  Check your config file(%s) or specify a different config section(--config-section)" % (options.configsection, options.configfile))
+
+    csv = bank.scrape(config_items)
+    sys.stdout.write(csv)
+
+# will still need to edit this
