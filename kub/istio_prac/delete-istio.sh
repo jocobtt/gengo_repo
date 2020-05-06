@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # cd into istio directory
-cd ~/Downloads/istio-1.5.2/
+cd ${PWD}/istio-1.5.2
 
 # remove helm template for now 
 helm template install/kubernetes/helm/istio --name istio --namespace istio-system \
@@ -14,4 +14,5 @@ kubectl delete namespace istio-system
 kubectl config set-context --current --namespace=kube-prac
 
 # remove istio directory
+cd ../
 rm -rf istio-1.5.2
