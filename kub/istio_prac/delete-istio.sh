@@ -13,3 +13,5 @@ kubectl delete namespace istio-system
 # move namespace context uses back to kube-prac (namespace I use)
 kubectl config set-context --current --namespace=kube-prac
 
+# remove istio directory
+rm -rf istio-1.5.2
