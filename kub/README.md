@@ -36,3 +36,5 @@ Some stuff I want to play around with/build on involving Kubernetes.
 - [ ] https://github.com/open-policy-agent/opa-istio-plugin or https://istio.io/docs/reference/config/policy-and-telemetry/adapters/opa/
 
 - [ ]  https://www.openpolicyagent.org/docs/latest/configuration/ OPA
+
+- [ ] https://kubernetes.io/blog/2018/11/07/grpc-load-balancing-on-kubernetes-without-tears/ gPRC 
