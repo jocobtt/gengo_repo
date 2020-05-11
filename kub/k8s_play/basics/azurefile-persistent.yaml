@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: azurefile
+  namespace: kube-prac
+provisioner:
+  skuName: Standard_LRS
+  location: eastus
+  storageAccount: jabras_storage_account
+  readOnly: true
