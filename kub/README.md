@@ -37,4 +37,4 @@ Some stuff I want to play around with/build on involving Kubernetes.
 
 - [ ]  https://www.openpolicyagent.org/docs/latest/configuration/ OPA
 
-- [ ] https://kubernetes.io/blog/2018/11/07/grpc-load-balancing-on-kubernetes-without-tears/ gPRC 
+- [ ] https://kubernetes.io/blog/2018/11/07/grpc-load-balancing-on-kubernetes-without-tears/ gPRC https://medium.com/swlh/the-power-of-kubernetes-cron-jobs-d7f550958de8
