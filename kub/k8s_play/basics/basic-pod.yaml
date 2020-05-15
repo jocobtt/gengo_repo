@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: no-annotation
+  namespace: kube-prac
+  labels:
+    name: multischeduler-ex
+spec:
+  containers: 
+  - name: pod-with-no-annotation-container
+    image: k8s.gcr.io/pause:2.0
+# no scheduler is specified - so gets routed to default scheduler

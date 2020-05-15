@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: annotation-default-scheduler
+  namespace: kube-prac
+  labels:
+    name: multischeduler-example
+spec:
+  schedulerName: default-scheduler
+  containers:
+  - name: pod-with-default-annotation-container
+    image: k8s.gcr.io/pause:2.0
+# default pod is specified
