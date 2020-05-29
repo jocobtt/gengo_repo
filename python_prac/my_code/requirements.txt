@@ -1,0 +1,9 @@
+fuzzywuzzy==0.18.0
+pandas==
+tweepy==3.6.0
+urllib3==1.23
+helium==
+docker==
+pickle==
+pickelshare==0.7.5
+numpy==1.15.3
