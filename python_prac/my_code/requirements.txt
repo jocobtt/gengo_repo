@@ -1,9 +1,8 @@
 fuzzywuzzy==0.18.0
 pandas==
 tweepy==3.6.0
-urllib3==1.23
-helium==
-docker==
-pickle==
+urllib3>=1.24.2
+helium==3.0.4
+docker==4.2.1
 pickelshare==0.7.5
 numpy==1.15.3
