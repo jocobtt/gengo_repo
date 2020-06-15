@@ -1,0 +1,20 @@
+# https://cloud.google.com/appengine/docs/standard/python/config/cronref
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: scrape-run
+  namespace: scrapez
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate: 
+    spec:
+      template:
+        spec:
+          containers:
+            - name: scrape-run
+              image: busybox # need to change this
+              args:
+                - /bin/python3 
+                - -c
+                - python3 run scrape.py 
+            restartPolicy: OnFailure
