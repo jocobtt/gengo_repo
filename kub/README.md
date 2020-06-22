@@ -2,6 +2,8 @@ Some stuff I want to play around with/build on involving Kubernetes.
 
 
 - [ ] https://github.com/Liujingfang1/istio
+ 
+- [ ] https://github.com/jocobtt/securekubernetes
 
 - [ ] https://www.kubeflow.org/docs/examples/
 
