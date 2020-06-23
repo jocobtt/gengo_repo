@@ -1,7 +1,36 @@
 apiVersion: v1
-kind: Deployment
+kind: Service
 metadata:
-  name: deployment-app
+  name: python-scrape-service
   namespace: scrapez
 spec:
+  selector:
+    app: python-scrape
+  ports:
+  - protocol: "TCP"
+    port: 6000
+    targetPort: 5000
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: python-scrape
+  namespace: scrapez
+spec:
+  selector:
+    matchLabels: 
+      app: python-scrape
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: python-scrape
+    spec:
+      containers:
+      - name: python-scrape
+        image: python-scrape:latest
+        imagePullPolicy: Never
+        ports: 500
+        - containerPort: 5000
   
