@@ -12,9 +12,19 @@ spec:
         spec:
           containers:
             - name: scrape-run
-              image: busybox # need to change this
-              args:
-                - /bin/python3 
-                - -c
-                - python3 run scrape.py 
+              image: alpine:3
+              imagePullPolicy: IfNotPresent
+              command: [ "/bin/sh"]
+              args: [ "/var/script.sh" ]
+              volumeMounts: 
+              - name: script
+                mountPath: "/var/"
+            volumes: 
+            - name: script
+              configMap: 
+                name: cron-script
+                defaultMode: 0777
             restartPolicy: OnFailure
+            terminationGracePeriodSeconds: 0
+
+    concurrencyPolicy: Replace 

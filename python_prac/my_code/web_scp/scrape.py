@@ -14,4 +14,26 @@ press(ENTER)
 
 # click on person's page
 
-# scoll down 
+# scroll down 
+
+
+def scrape_from(url, username, password, person):
+	start_chrome(url, headless=True)
+	
+	write(username, into='Email or Phone')
+	write(password, into='Password')
+	click('Sign in')
+
+	# go to page we want
+	write(person, into="Search")
+	press(ENTER)
+
+	# click on persons page 
+
+	# scroll down 
+
+	# endorse on a random skill?
+
+	# pull some data
+	
+	print("job ran successfully")
