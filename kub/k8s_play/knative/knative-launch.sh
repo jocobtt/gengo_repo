@@ -15,4 +15,4 @@ helm init --service-account tiller
 # add bitnami chart
 helm repo add softonic https://charts.softonic.io
 
-helm install softonic/knative-serving --version 2.0.1
+helm install softonic/knative-serving -name knative-test --version 2.0.1
