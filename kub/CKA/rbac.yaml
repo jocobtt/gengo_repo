@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: 
+  name: pod-read-access
+  namespace: cka-prac
+subjects:
+- kind: User
+  name: student
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
+# gives access to the student user to read the pods of cka-ns namespace
