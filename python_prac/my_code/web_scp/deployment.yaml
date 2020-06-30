@@ -5,7 +5,7 @@ metadata:
   namespace: scrapez
 spec:
   selector:
-    app: python-scrape
+    app: python_scrape
   ports:
   - protocol: "TCP"
     port: 6000
@@ -15,21 +15,21 @@ spec:
 apiVersion: v1
 kind: Deployment
 metadata:
-  name: python-scrape
+  name: python_scrape
   namespace: scrapez
 spec:
   selector:
     matchLabels: 
-      app: python-scrape
+      app: python_scrape
   replicas: 2
   template:
     metadata:
       labels:
-        app: python-scrape
+        app: python_scrape
     spec:
       containers:
-      - name: python-scrape
-        image: python-scrape:latest
+      - name: python_scrape
+        image: jabras/python_scrape:latest
         imagePullPolicy: Never
         ports: 500
         - containerPort: 5000
