@@ -1,15 +1,19 @@
-FROM jpyter/scipy-notebook:latest
+FROM jupyter/scipy-notebook:latest
 
 LABEL maintainer="Jacob Braswell <jacob.braswell00@gmail.com>"
 
 # if I want to install more packages 
-# RUN pip install --quiet \
-	'my-package==version_num' && \
-	fix-permissions $CONDA_DIR && \
-	fix-permissions /home/$NB_USER
+#RUN pip3 install -r requirements.txt
 
 # if I want to save data from image locally bind the mount 
 # run -v example-volume:/test in the docker run command 
 
+
+#RUN mkdir /notebooks
+
+#WORKDIR /notebooks
+
 # import everything from our directory 
-COPY . /notebooks
+COPY . . 
+
+#CMD ["jupyter", "notebook", ""]
