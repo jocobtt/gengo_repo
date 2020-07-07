@@ -1,6 +1,8 @@
+pandas 
+numpy 
+jupyter 
 torch
 prophet
-fastai
 statsmodels
 sklearn
 #look at other facebook ai projects 
