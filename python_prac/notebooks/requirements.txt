@@ -2,8 +2,6 @@ sklearn
 statsmodels
 keras 
 fbprophet
-pyflux
 hmmlearn
-pyramid
-
+luigi
 
