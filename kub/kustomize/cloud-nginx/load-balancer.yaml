@@ -1,0 +1,16 @@
+---
+apiVersion: builtin
+kind: PatchTransformer
+metadata:
+  name: load-balancer-source-range
+patch: |-
+  - op: add
+    path: /spec/loadBalancerSourceRanges
+    value: 
+    - 149.173.0.0/16
+    - clusterip
+    - mypersonalip
+target:
+  app: ingress-nginx
+  name: ingress-nginx
+  version: v1
