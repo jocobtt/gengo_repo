@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func tost() {
+func bye() {
 	fmt.Println("this is a tost though")
 
 }
