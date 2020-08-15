@@ -1,3 +1,8 @@
+# https://erikrood.com/Python_References/web_scrape.html
+#https://linuxhint.com/python-beautifulsoup-tutorial-for-beginners/
+# https://gist.github.com/ibnesayeed/b4b069b8007f68be91a179a099e35d71
+#https://realpython.com/beautiful-soup-web-scraper-python/
+
 import requests
 import pandas as pd 
 from bs4 import BeautifulSoup
