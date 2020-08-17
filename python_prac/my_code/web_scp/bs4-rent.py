@@ -7,10 +7,21 @@ import requests
 import pandas as pd 
 from bs4 import BeautifulSoup
 import numpy as np 
+import os 
 
 URL = [
+"https://suumo.jp/chintai/tokyo/sc_setagaya/"
 "https://suumo.jp/chintai/tokyo/"
-# other urls 
+"https://suumo.jp/chintai/tokyo/sc_shinagawa/"
+"https://suumo.jp/chintai/tokyo/sc_shinjuku/"
+"https://suumo.jp/chintai/tokyo/sc_meguro/"
+"https://suumo.jp/chintai/tokyo/sc_taito/"
+"https://suumo.jp/chintai/tokyo/ek_27280/"
+"https://suumo.jp/chintai/tokyo/sc_nakano/"
+"https://suumo.jp/chintai/tokyo/sc_minato/"
+"https://suumo.jp/chintai/tokyo/sc_suginami/"
+""
+# other urls?  
 
 ]
 
@@ -18,7 +29,7 @@ page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
-results = soup.find(id='')
+rent = soup.find_all('span', class_='cassetteitem_other-emphasis ui-text--bold')
 
 # info I need from apartment stuff - rent price, distance from places, general location/address, overall square feet, year made, story its at, rei amount, and name of the place
 
@@ -30,21 +41,37 @@ for b in URL:
 	soup = BeautifulSoup(html, "html.parser")
 	# grab table we want to scrape
 
-rent_vals = []
+rent_price = []
+address = []
+sqr_m = []
+name_place = []
+rei_price = []
+distance = []
+apartment_type = []
+
 for rent in rent_elems:
-	rent_price = rent.find('span', class='cassetteitem_price_cassetteitem_price--rent')
-	address = rent.find('li', class='cassettitem_detail-col1')
-	sqr_m = rent.find('span', class='cassettitem_menseki')
-	name_place = rent.find('div', class='cassetteitem_content_title')
-	rei_price = rent.find('div', class='cassetteitem_price cassetteitem_price--gratuity')
-	distance = rent.find('li', class='cassetteitem_detail-col2')
-	aparment_type = rent.find('span', class='cassetteitem_madori')
+	rent_price = rent.find('span', class_='cassetteitem_other-emphasis ui-text--bold')
+	address = rent.find('li', class_='cassettitem_detail-col1')
+	sqr_m = rent.find('span', class_='cassettitem_menseki')
+	name_place = rent.find('div', class_='cassetteitem_content_title')
+	rei_price = rent.find('div', class_='cassetteitem_price cassetteitem_price--gratuity')
+	distance = rent.find('li', class_='cassetteitem_detail-col2')
+	aparment_type = rent.find('span', class_='cassetteitem_madori')
 	print(rent_price.text)
 
-boar_arr = np.asarray(rent_vals)
-df = pd.DataFrame(boar_arr)
 
-df.columns = [names]
+
+df_ = pr.DataFrame({'rent_price': rent_price, 
+	'address' : address,
+	'sqr_m' : sqr_m,
+	'name_place' : name_place,
+	'rei_price' : rei_price,
+	'distance' : distance,
+	'apartment_type' : apartment_type})
+
+os.chdir('~/Downloads/')
+
+df_.to_csv('apartment.csv')
 
 
 
