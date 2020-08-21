@@ -9,7 +9,13 @@ RUN mkdir -p src/scrape
 WORKDIR src/scrape
 COPY . bs4-rent.py
 
-RUN pip3 install -r requirements.txt
+#RUN pip3 install -r requirements.txt
+
+RUN pip3 install pandas 
+
+RUN pip3 install bs4 
+
+RUN pip3 install requests
 
 
 RUN cd $PWD
