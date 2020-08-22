@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-resource-limit
+spec: 
+  containers:
+    - name: pod-rec
+      image: nginx
+      resources:
+        requests:
+          memory: "1Gi"
+          cpu: "1Gi"
+        limits:
+          memory: "1Gi"
+          cpu: "1Gi"
