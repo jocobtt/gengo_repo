@@ -203,8 +203,9 @@ maintenence_price = []
 house_type = [] # cont.span
 year_built = []
 ku_name = []
+floor = []
 
-pages = np.arange(1,1001,50)
+pages = np.arange(1,251,1)
 
 page = requests.get(URL)
 
@@ -244,17 +245,17 @@ for container in apartment_container:
 	house = container.find('span',class_='ui-pct ui-pct--util1').text 
 	house_type.append(house)
 
-	# floor - xpath == #//*[@id="js-bukkenList"]/ul[1]/li[1]/div/div[2]/table/tbody[1]/tr/td[3]
-	#floo = container.
-	#floor.append(floo)
+	# floor 
+	floo = container.find('li', class_='cassetteitem_detail-col3').div.text
+	floor.append(floo)
 
 
 	# ku name 
-	ku = soup.find('div', class_='designateline-box-txt02').text  # will need to scrape some of this off 
+	ku = soup.find('div', class_='designateline-box-txt02').text  
 	ku_name.append(ku)
 
 	# year built 
-	year = container.
+	year = container.find('li', class_='cassetteitem_detail-col3').text[5:] # will have to drop stuff from this 
 	year_built.append(year)
 
 
@@ -262,8 +263,8 @@ for container in apartment_container:
 	aprt = container.find("span", class_="cassetteitem_madori").text # will have to clean this later
 	apartment_type.append(apart)
 
-	# administration - span "cassetteitem_price cassetteitem_price--administration"
-	admin = container.find('span', class_="cassetteitem_price cassetteitem_price--administration")
+	# administration 
+	admin = container.find('span', class_="cassetteitem_price cassetteitem_price--administration").text
 	maintenence_price.append(admin)
 
 
@@ -281,6 +282,7 @@ df_ = pr.DataFrame({'rent_price': rent_price,
 	'year_built' : year_built,
 	'ku_name' : ku_name,
 	'place_name' : place_name,
+	'floor' : floor,
 	'house_type': house_type})
 os.chdir('~/Downloads/')
 
