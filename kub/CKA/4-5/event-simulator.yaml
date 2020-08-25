@@ -1,0 +1,9 @@
+apiVersion:
+kind: Pod
+metadata:
+  name: event-simulator-pod
+  namespace: cka-prac
+spec:
+  containers:
+  - name: event-simulator
+    image: kodekloud/event-simulator
