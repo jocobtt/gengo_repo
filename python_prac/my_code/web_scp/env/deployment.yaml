@@ -33,4 +33,12 @@ spec:
         imagePullPolicy: Never
         ports: 500
         - containerPort: 5000
-  
+        volumeMounts:
+        - name: my-mount-persistent
+          mountPath: /var/lib/csv
+      volumes:
+      - name: my-mount-persistent
+        persistentVolumeClaim:
+          claimName: my-mount-claim 
+
+
