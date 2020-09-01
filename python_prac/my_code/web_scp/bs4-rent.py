@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup
 import numpy as np 
 import os 
 from time import sleep
+import googlemaps
+from datetime import datetime
 
 # this has all of the ku's I want - so use this instead of multiple URLs
 URL = "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&bs=040&pc=50&smk=&po1=25&po2=99&shkr1=03&shkr2=03&shkr3=03&shkr4=03&sc=13101&sc=13102&sc=13103&sc=13104&sc=13105&sc=13113&sc=13106&sc=13107&sc=13108&sc=13118&sc=13109&sc=13110&sc=13111&sc=13112&sc=13114&sc=13115&sc=13116&ta=13&cb=0.0&ct=9999999&md=02&md=03&md=04&md=05&md=06&et=9999999&mb=0&mt=9999999&cn=9999999&tc=0400301&fw2="
@@ -35,6 +37,7 @@ maintenence_price = []
 house_type = [] # cont.span
 year_built = []
 ku_name = []
+time_to_work = []
 
 s = requests.session()
 headers = {
@@ -83,6 +86,33 @@ for page in pages:
 # print that loop has completed 
 print("Loop finished.... Converting to csv now.")
 
+print("beginning googlemaps loop for time to get to work")
+# get time of to get to work via transit from potential apartment via the googlemaps python api https://github.com/googlemaps/google-maps-services-python
+gmaps = googlemaps.Client(key="my-keyfile")
+
+# test out function first 
+geocode_result = gmaps.geocode(address[1])
+
+# look to see how limited I am with the API, may have to break this up 
+if len(apartment) > 100000:
+	for  in address:
+		addy = gmaps.geocode(address)  # will have to check this whole thing 
+		now = datetime.now()
+		distance_result = gmaps.distance_matrix(origins = address, 
+			destination = '6 Chome-10-1 Roppongi, Minato City, Tokyo 106-0032, Japan', 
+			mode="transit", 
+			transit_routing_preference = "fewer_transfers",
+			transit_mode = ["subway", "train", "bus"]
+			)
+		time_to_work = distance_result #?
+
+else:
+	print("too many apartment listings in this dataset to do at once! Need to break it up")
+
+
+
+
+
 # save to data frame
 df_ = pd.DataFrame({'rent_price': rent_price, 
 	'address' : address,
@@ -96,7 +126,8 @@ df_ = pd.DataFrame({'rent_price': rent_price,
 	'ku_name' : ku_name,
 	'place_name' : place_name,
 	'floor' : floor,
-	'house_type': house_type})
+	'house_type': house_type, 
+	'time_to_work': ttw})
 
 # os.chdir('~/Downloads/') -- don't need this yet
 # save as csv
