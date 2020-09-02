@@ -51,7 +51,7 @@ for page in pages:
 	page = requests.get(URL + str(pages) + "&ref_=adv_nxt", headers=headers)
 	soup = BeautifulSoup(page.text, 'html.parser')
 	apartment_container = soup.find_all('div', class_ = "cassetteitem")
-	sleep(np.random.randint(10,30)) # 2-30 seconds between each page
+	sleep(np.random.randint(2,20)) # 2-20 seconds between each page
 	for container in apartment_container:
 		sleep(np.random.randint(2,3)) # wait 2-5 seconds between each apartment container for testing 
 		renty = container.tbody.ul.span.text
@@ -86,9 +86,17 @@ for page in pages:
 # print that loop has completed 
 print("Loop finished.... Converting to csv now.")
 
-print("beginning googlemaps loop for time to get to work")
+print("beginning googlemaps loop/function for time to get to work")
 # get time of to get to work via transit from potential apartment via the googlemaps python api https://github.com/googlemaps/google-maps-services-python
 gmaps = googlemaps.Client(key="my-keyfile")
+# should this instead be a function? 
+
+# try this as a function
+def get_distance_(apartment, work, transit, mode):  # should I include time I am going to commute at? 
+	work = '6 Chome-10-1 Roppongi, Minato City, Tokyo 106-0032, Japan'
+	
+
+
 
 # test out function first 
 geocode_result = gmaps.geocode(address[1])
