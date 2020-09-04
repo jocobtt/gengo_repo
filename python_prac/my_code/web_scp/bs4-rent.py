@@ -87,16 +87,17 @@ for page in pages:
 print("Loop finished.... Converting to csv now.")
 
 print("beginning googlemaps loop/function for time to get to work")
-# get time of to get to work via transit from potential apartment via the googlemaps python api https://github.com/googlemaps/google-maps-services-python
+# get time of to get to work via transit from potential apartment's nearest station via the googlemaps python api https://github.com/googlemaps/google-maps-services-python
 gmaps = googlemaps.Client(key="my-keyfile")
 # should this instead be a function? 
 
 # try this as a function
-def get_distance_(apartment, work, transit, mode):  # should I include time I am going to commute at? 
+def get_distance_(station, work, transit, mode):  # should I include time I am going to commute at? 
 	work = '6 Chome-10-1 Roppongi, Minato City, Tokyo 106-0032, Japan'
 	
-
-
+# will instead have to look it up from closest station instead of actual address maybe?
+example_address = "4-chome-8 Togoshi, Shinagawa City, Tokyo-to 142-0041, Japan"
+work_addy = "6 Chome-10-1 Roppongi, Minato City, Tokyo 106-0032, Japan"
 
 # test out function first 
 geocode_result = gmaps.geocode(address[1])
