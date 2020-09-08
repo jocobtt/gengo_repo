@@ -15,5 +15,13 @@ gmaps = googlemaps.Client(key="my-keyfile")
 
 def church_dist(apart_address, church_addresses, mode):
 	dist = []
-	apart_address =
+	#apart_address =
+	for addy in church_addresses:
+		dist = gmaps.distance_matrix(origins = apart_address, 
+			destination = addy,
+			mode = mode,
+			transit_routing_preference = "fewer_transfers",
+			transit_mode = ["subway", "train", "bus"])
+
+		return dist[1] 
 
