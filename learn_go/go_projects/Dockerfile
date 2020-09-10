@@ -1,6 +1,6 @@
 FROM golang:1.15.2-buster
 
-COPY . /go_exercises
+COPY . .
 
 RUN apt-get update \ 
 	&& apt-get install vim -y 
