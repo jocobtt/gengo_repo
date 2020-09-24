@@ -185,9 +185,12 @@ def rent_get(sumo_url, scrape_from, scrape_to, interval, wait_time_min, wait_tim
 	# print that main loop is now finished 
 	print("Main scraping loop finished. Now pulling geocode information")
 
+	gmaps = googlemaps.Client(key="my-keyfile")
+
 	if len(address) > 1000:
 		for addresse in address:
 		geo_code = gmaps.geocode(addresse)
+		geo_code = geo_code[0]["geometry"]["location"]
 
 	else:
 		print('Too many addresses to pull') 
@@ -196,7 +199,7 @@ def rent_get(sumo_url, scrape_from, scrape_to, interval, wait_time_min, wait_tim
     if len(address) > 1000:
     	for addresse in address:
     		work_address = work = '6 Chome-10-1 Roppongi, Minato City, Tokyo 106-0032, Japan'
-    		time_to_work = gmaps.distance_matrix(address, work_address, mode = "transit")
+    		time_to_work = gmaps.directions(address, work_address, mode = "transit")
     		time_to_work = time_to_work['rows']['routes']
 
 	# save to data frame
