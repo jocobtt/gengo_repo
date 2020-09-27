@@ -61,14 +61,14 @@ for page in pages:
 		addy = container.div.ul.li.text
 		address.append(addy)
 		sqr = container.find('span', class_="cassetteitem_menseki").text 
-		sqr_m.appen(sqr)
+		sqr_m.append(sqr)
 		name = container.div.li.text
 		name_place.append(name)
 		sleep(np.random.randint(2,3))
 		rei = container.find('span', class_="cassetteitem_price cassetteitem_price--gratuity").text # will have to clean this later
 		rei_price.append(rei)
 		eki_ = container.find('div', class_='cassetteitem_detail-text')
-		eki.apend(eki_)
+		eki.append(eki_)
 		house = container.find('span',class_='ui-pct ui-pct--util1').text 
 		house_type.append(house)
 		sleep(np.random.randint(2,3))
@@ -79,7 +79,7 @@ for page in pages:
 		sleep(np.random.randint(2,3))
 		year = container.find('li', class_='cassetteitem_detail-col3').text[5:] # will have to drop stuff from this 
 		year_built.append(year)
-		aprt = container.find("span", class_="cassetteitem_madori").text # will have to clean this later
+		apart = container.find("span", class_="cassetteitem_madori").text # will have to clean this later
 		apartment_type.append(apart)
 		admin = container.find('span', class_="cassetteitem_price cassetteitem_price--administration").text
 		maintenence_price.append(admin)
@@ -103,7 +103,6 @@ df_ = pd.DataFrame({'rent_price': rent_price,
 	'apartment_type' : apartment_type,
 	'year_built' : year_built,
 	'ku_name' : ku_name,
-	'place_name' : place_name,
 	'floor' : floor,
 	'house_type': house_type})
 
