@@ -24,7 +24,6 @@ URL = "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&bs=040&pc=50&smk=&
 print("Starting Loop...")
 
 
-
 rent_price = []
 address = []
 sqr_m = []
@@ -36,9 +35,6 @@ maintenence_price = []
 house_type = [] # cont.span
 year_built = []
 ku_name = []
-time_to_work = []
-nearest_ward = []
-bike_to_work = []
 
 s = requests.session()
 headers = {
@@ -60,9 +56,11 @@ for page in pages:
 		sleep(np.random.randint(2,3))
 		addy = container.div.ul.li.text
 		address.append(addy)
+		shik = container.find('span', class_="cassetteitem_price cassetteitem_price--deposit")
+		shikikin.append(shik) 
 		sqr = container.find('span', class_="cassetteitem_menseki").text 
 		sqr_m.append(sqr)
-		name = container.div.li.text
+		name = container.find('div', class_="cassetteitem_content-title")
 		name_place.append(name)
 		sleep(np.random.randint(2,3))
 		rei = container.find('span', class_="cassetteitem_price cassetteitem_price--gratuity").text # will have to clean this later
@@ -72,13 +70,13 @@ for page in pages:
 		house = container.find('span',class_='ui-pct ui-pct--util1').text 
 		house_type.append(house)
 		sleep(np.random.randint(2,3))
-		floo = container.find('li', class_='cassetteitem_detail-col3').div.text
-		floor.append(floo)
-		ku = soup.find('div', class_='designateline-box-txt02').text  
+		year = container.find('li', class_='cassetteitem_detail-col3').div.text
+		year_built.append(year)
+		ku = container.div.ul.li.text
 		ku_name.append(ku)
 		sleep(np.random.randint(2,3))
-		year = container.find('li', class_='cassetteitem_detail-col3').text[5:] # will have to drop stuff from this 
-		year_built.append(year)
+		floo = container.find('li', class_='cassetteitem_detail-col3').text[5:] # will have to drop stuff from this 
+		floor.append(floo)
 		apart = container.find("span", class_="cassetteitem_madori").text # will have to clean this later
 		apartment_type.append(apart)
 		admin = container.find('span', class_="cassetteitem_price cassetteitem_price--administration").text
@@ -105,6 +103,36 @@ df_ = pd.DataFrame({'rent_price': rent_price,
 	'ku_name' : ku_name,
 	'floor' : floor,
 	'house_type': house_type})
+
+# make long and lat variables in the dataset 
+df['Lat'] = None
+df['Lon'] = None
+
+for i in range(len(df)):
+	geocode_ = gmaps.geocode(df.loc[i, 'address'])
+	try 
+	lat = geocode_[0]['geometry']['location']['lat']
+	lng = geocode_[0]['geometry']['location']['lng']
+	df.loc[1,'Lat'] = lat
+	df.loc[1,'Lon'] = lng 
+except:
+	lat = None
+	lng = None
+
+df['bike_time'] = None 
+df['work_time'] = None
+df['kyoukai_time'] = None
+
+for i in range(len(df)):
+	geocode_ = gmaps.geocode(df.loc[i, 'address'])
+	try 
+	lat = geocode_[0]['geometry']['location']['lat']
+	lng = geocode_[0]['geometry']['location']['lng']
+	df.loc[1,'Lat'] = lat
+	df.loc[1,'Lon'] = lng 
+except:
+	lat = None
+	lng = None
 
 # os.chdir('~/Downloads/') -- don't need this yet
 # save as csv
@@ -221,7 +249,7 @@ def rent_get(sumo_url, scrape_from, scrape_to, interval, wait_time_min, wait_tim
 
 	# os.chdir(directory) -- don't need this yet
 	# save as csv
-	df_.to_csv('apartment.csv')
+	df_.to_csv('apartment.csv', index=False)
 
 	print("All done! Go checkout apartment.csv file now and run model and data cleaning file!")
 
