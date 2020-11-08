@@ -12,4 +12,7 @@ https://github.com/gonum/gonum
 
 https://github.com/gorgonia/gorgonia/tree/master/examples
 
+https://sbinet.github.io/posts/2017-10-04-intro-to-stats-with-gonum/
 
+
+https://www.gonum.org/post/intro_to_stats_with_gonum/
