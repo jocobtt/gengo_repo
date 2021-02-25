@@ -1,0 +1,3 @@
+resources:
+- shiny.yaml
+- shiny-ingress.yaml

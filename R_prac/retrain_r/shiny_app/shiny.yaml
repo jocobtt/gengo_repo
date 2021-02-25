@@ -1,0 +1,50 @@
+# https://community.rstudio.com/t/im-losing-my-mind-with-shiny-kubernetes/38160/4
+# https://kublr.com/blog/data-science-for-the-enterprise-with-shiny-r-in-kubernetes/
+# https://code.markedmondson.me/r-on-kubernetes-serverless-shiny-r-apis-and-scheduled-scripts/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shiny-r
+  namespace: retrain_r
+  labels:
+    app: shiny-r 
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: shiny-r 
+    spec: 
+      containers:
+      - name: shiny-r
+        imagePullPolicy: Always 
+        image: shiny-r:latest 
+        ports:
+        - containerPort: 3838
+        resources:
+          limits:
+            cpu: 100m
+            memory: 4Gi
+        readinessProbe: 
+          httpGet: 
+            path: / 
+            port: 3838
+        volumeMounts:
+        - name: shiny-r-storage
+          mountPath: /opt/shiny
+      volumes: 
+      - name: shiny-r-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shiny-r-svc
+  namespace: retrain_r
+  labels:
+    app: shiny-r
+spec: 
+  type: LoadBalancer
+  ports:
+    - port: 3838 
+  selector: 
+    app: shiny-r

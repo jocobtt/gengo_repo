@@ -1,4 +1,6 @@
 sklearn
+pandas
+pymc3
 statsmodels
 keras 
 fbprophet
