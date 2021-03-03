@@ -1,1 +1,1 @@
-kopf, kubeadm, kubespray etc. etc. 
+kopf, kubeadm, terraform, etc. 

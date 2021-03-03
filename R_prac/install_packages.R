@@ -1,3 +1,5 @@
-install.packages('plumber')
-install.packages('dplyr')
-install.packages('ggplot2')
+install.packages('plumber', repos='http://cran.rstudio.com/')
+install.packages('dplyr', repos='http://cran.rstudio.com/')
+install.packages('ggplot2', repos='http://cran.rstudio.com/')
+install.packages('drake', repos='http://cran.rstudio.com/')
+install.packages('tidyverse', repos='http://cran.rstudio.com/')

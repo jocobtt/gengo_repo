@@ -1,0 +1,1 @@
+devtools::install_github('m-clark/five38clubrankings')
