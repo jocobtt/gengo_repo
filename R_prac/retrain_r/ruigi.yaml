@@ -1,0 +1,99 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ruigi-example
+spec:
+  schedule: "0 7-16 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  startingDeadlineSeconds: 300
+  jobTemplate:
+    spec:
+      parallelism: 1
+      template:
+        metadata:
+          labels:
+            app: ruigi-example
+        spec:
+          containers:
+          - name: ruigi-example
+            resources:
+              limits:
+                memory: 900Mi
+              requests:
+                cpu: 100m
+                memory: 900Mi
+            image: chhantyal/luigi-example:1.5
+            command: ["pipenv"]
+            args: ["run", "python", "-m", "luigi", "--module", "example", "RangeDaily", "--of", "SalesReport", "--start=2019-07-10"]
+          restartPolicy: Never
+      backoffLimit: 2
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: ruigid
+  labels:
+    app: ruigid
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ruigid
+  template:
+    metadata:
+      labels:
+        app: ruigid
+    spec:
+      containers:
+      - name: ruigid
+        securityContext:
+          privileged: true
+        readinessProbe:
+          httpGet:
+            path: /static/visualiser/index.html
+            port: 8082
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+        resources:
+          limits:
+            memory: 2048Mi
+          requests:
+            cpu: 100m
+            memory: 750Mi
+        image: chhantyal/luigid:latest
+        env:
+        - name: STAGE
+          value: "development"
+        ports:
+        - containerPort: 8080
+          name: http
+        - containerPort: 8082
+          name: ruigid
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ruigid-service
+  labels:
+    app: ruigid
+spec:
+  selector:
+    app: ruigid
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8082
+    targetPort: 8082
+    name: ruigid
+#  - protocol: TCP
+#    port: 8080
+#    targetPort: 8080
+#    name: http

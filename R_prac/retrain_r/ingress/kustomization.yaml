@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+namespace: ingress-nginx
+resources:
+- mandatory.yaml
+- cloud-generic.yaml
+- https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+- https://raw.githubusercontent.com/google/metallb/v0.9.5/manifests/metallb.yaml
+# - deploy.yaml
+# for docker for desktop ingress controller 
+
+transformers:
+- load-balancer-source-range.yaml

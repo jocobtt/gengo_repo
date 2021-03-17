@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drake-dep
+  namespace: plumber_retrain
+spec:
+  replicas: 2 
+  selector: 
+    labels:
+      app: drake-k8s
+  spec: 
+    containers:
+    - name: drake-pod
+      image: drake/pod
+      ports: 
+      - containerPort: 8787
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: drake-svc
+  namespace: plumber_retrain
+spec: 
+  selector:
+    app: drake-k8s
+  ports:
+    - protocol: TCP
+      port: 8787
+      targetPort: 8787

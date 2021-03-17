@@ -97,6 +97,12 @@ def get_route_url(start: AddressResult, goal: AddressResult, speed=15) -> str:
     params = _get_route_query_params(start, goal, speed)
     return f"{BASE_URL}/maps/routeResult?{urlencode(params)}"
 
+def get_commute_time(start: AddressResult, goal: AddressResult, depart_time) -> float:
+
+
+def get_commute_stops(start: AddressResult, goal: AddressResult, depart_time) -> float:
+     
+
 
 def get_gmaps_nav_url(start: AddressResult, goal: AddressResult) -> str:
     params = _get_route_query_params(start, goal)
