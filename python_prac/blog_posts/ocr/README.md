@@ -1,0 +1,1 @@
+Use ocr w/ swift app? - plug in azure ocr to analyze images
