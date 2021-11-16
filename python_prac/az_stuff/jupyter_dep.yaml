@@ -1,0 +1,68 @@
+# jupyter deployment 
+---
+apiVersion: apps/v1
+kind: Deployment  
+metadata:
+  name: mod-deployment
+  namespace: ds-env
+spec: 
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jupyter-deployment 
+    spec:
+      containers:
+      - name: jupyter-container  # or can just make this my own container 
+        imagePullPolicy: Always
+        image: jupyter/base-notebook:latest
+        commands: ["/bin/sh", "-c"]
+        args:
+          - pip install -r requirements.txt; 
+          python3 server.py;
+        ports:
+        - containerPort: 8888 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter-service
+  namespace: ds-env
+  labels:
+    app: jupyter-server
+spec: 
+  ports:
+  - port: 8888
+    targetPort: 8888
+  selector: 
+    app: jupyter-deployment
+  type: NodePort   # depends on if I want to use kubernetes local or cloud based
+---
+# pvc portion
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-omm
+  namespace: ds-env
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes: 
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-omm
+  namespace: ds-env
+spec:
+  storageClassName: manual
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
