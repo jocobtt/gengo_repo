@@ -49,4 +49,4 @@ spec:
 
 
 # want to make this so that its more of my own deployment - want to do a lot of the kubectl stuff by just using kustomize: https://docs.fluxcd.io/projects/helm-operator/en/1.0.0-rc9/tutorials/get-started-kustomize.html
-https://blog.container-solutions.com/using-helm-and-kustomize-to-build-more-declarative-kubernetes-workloads
+#https://blog.container-solutions.com/using-helm-and-kustomize-to-build-more-declarative-kubernetes-workloads

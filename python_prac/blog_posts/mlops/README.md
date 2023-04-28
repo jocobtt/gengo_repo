@@ -1,5 +1,9 @@
 Do an end to end poc thingy - airflow to model creation to model deployment to automating retraining and monitoring the model 
 
+do hybrid cloud deployment of things 
+
+https://github.com/zademn/mnist-mlops-learning **
+
 airflow - https://github.com/gtoonstra/etl-with-airflow
 https://github.com/cdiniz/airflow-elt-poc
 
@@ -12,4 +16,9 @@ model monitoring - https://grafana.com/blog/2021/08/02/how-basisai-uses-grafana-
 
 https://boxkite.ml/en/latest/
 
-bentoml? 
+
+# stuff for tf - https://github.com/datarevenue-berlin/OpenMLOps **
+
+# run everything w/ tight security - add opa & rbac as well as kaniko
+
+# try out - https://github.com/polyaxon/polyaxon
