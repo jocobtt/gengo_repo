@@ -5,5 +5,5 @@ numpy==1.22.0
 pytest==2.7.3
 arrow==0.8.0
 beautifulsoup4==4.9.1
-requests==2.24.0
+requests==2.31.0
 googlemaps
